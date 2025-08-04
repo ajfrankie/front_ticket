@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/admin/ticket/index", {
+      .get("admin/ticket/index", {
         withCredentials: true, // Important for Sanctum cookies
       })
       .then((res) => {
@@ -39,14 +39,31 @@ const Home = () => {
       <div className="navbar-space"></div>
 
       <main className="home-container">
-        <h1>Welcome to the Ticket System</h1>
-        <button className="create-ticket-btn" onClick={() => navigate("/ticket")}>
-          Create Ticket
-        </button>
+        {loading ? (
+          <p>Loading tickets...</p>
+        ) : tickets.length === 0 ? (
+          <p>No tickets found.</p>
+        ) : (
+          <div className="ticket-card-container">
+            {tickets.map((ticket) => (
+              <div key={ticket.id} className="ticket-card">
+                <h3>{ticket.subject}</h3>
+                <p><strong>Priority:</strong> {ticket.priority}</p>
+                <p><strong>Status:</strong> {ticket.status}</p>
+                <p className="description">{ticket.description}</p>
 
-        <button className="create-ticket-btn" onClick={() => navigate("/viewticket")}>
-          View Tickets
-        </button>
+                <button
+                  className="track-btn"
+                  onClick={() => goToTrackPage(ticket.id)}
+                >
+                  Track
+                </button>
+
+            
+              </div>
+            ))}
+          </div>
+        )}
       </main>
     </>
   );

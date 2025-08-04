@@ -20,11 +20,13 @@ const Nav = () => {
               <Link to="/home">Home</Link>
             </li>
 
-        
+            <li>
+              <Link to="/updateticket">Update Ticket</Link>
+            </li>
 
             {user?.role === "admin" && (
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/updateticket">Update Ticket</Link>
               </li>
             )}
 
@@ -43,7 +45,7 @@ const Nav = () => {
               </li>
             )}
 
-                <li>
+            <li>
               <Link to="/">Logout</Link>
             </li>
           </ul>

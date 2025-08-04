@@ -33,17 +33,16 @@ const Home = () => {
     navigate(`/track/${id}`);
   };
 
+  const goToUpdatePage = (id) => {
+    navigate(`/ticket/edit/${id}`);
+  };
+
   return (
     <>
       <Nav />
       <div className="navbar-space"></div>
 
       <main className="home-container">
-        <h1>Welcome to the Ticket System</h1>
-        <button className="create-ticket-btn" onClick={() => navigate("/ticket")}>
-          Create Ticket
-        </button>
-
         {loading ? (
           <p>Loading tickets...</p>
         ) : tickets.length === 0 ? (
@@ -56,8 +55,20 @@ const Home = () => {
                 <p><strong>Priority:</strong> {ticket.priority}</p>
                 <p><strong>Status:</strong> {ticket.status}</p>
                 <p className="description">{ticket.description}</p>
-                <button className="track-btn" onClick={() => goToTrackPage(ticket.id)}>
+
+                <button
+                  className="track-btn"
+                  onClick={() => goToTrackPage(ticket.id)}
+                >
                   Track
+                </button>
+
+                <button
+                  className="update-btn"
+                  onClick={() => goToUpdatePage(ticket.id)}
+                  style={{ marginLeft: "10px" }}
+                >
+                  Update
                 </button>
               </div>
             ))}
