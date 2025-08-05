@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/admin/ticket/index", {
-        withCredentials: true, // Important for Sanctum cookies
+        withCredentials: true,
       })
       .then((res) => {
         if (res.data.success) {
@@ -40,13 +40,15 @@ const Home = () => {
 
       <main className="home-container">
         <h1>Welcome to the Ticket System</h1>
-        <button className="create-ticket-btn" onClick={() => navigate("/ticket")}>
-          Create Ticket
-        </button>
+        <div className="button-group">
+          <button className="create-ticket-btn" onClick={() => navigate("/ticket")}>
+            Create Ticket
+          </button>
 
-        <button className="create-ticket-btn" onClick={() => navigate("/viewticket")}>
-          View Tickets
-        </button>
+          <button className="create-ticket-btn" onClick={() => navigate("/viewticket")}>
+            View Tickets
+          </button>
+        </div>
       </main>
     </>
   );

@@ -22,16 +22,20 @@ const Login = () => {
       });
 
       console.log(response, "response from login API");
-      const token = response.data.token;
-      const userId = response.data.user_id;
-      console.log("userId-login:", userId); // should print a number or string, not undefined
-      // Save token in localStorage (if using token auth)
+
+      const { token, user_id, role } = response.data;
+
+      // Save token
       localStorage.setItem("token", token);
 
-      // Set cookie for user_id (expires in 7 days)
-      document.cookie = `user_id=${userId}; path=/; max-age=${
-        7 * 24 * 60 * 60
-      }`;
+      // Save user info for role-based Nav
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: user_id,
+          role: role,
+        })
+      );
 
       alert("Login successful!");
       navigate("/home");

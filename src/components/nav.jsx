@@ -1,14 +1,41 @@
-import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./nav.css";
 
 const Nav = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Optional: Call Laravel logout endpoint if needed
+  // On mount, load user info from localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      // Call logout endpoint if implemented
+      await axios.post(
+        "http://127.0.0.1:8000/api/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log("Logout failed, continuing anyway.");
+    }
+
+    // Clear localStorage and redirect
+    localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "/home";
+    setUser(null);
+    navigate("/home");
   };
 
   return (
@@ -18,10 +45,6 @@ const Nav = () => {
           <ul className="menu">
             <li>
               <Link to="/home">Home</Link>
-            </li>
-
-            <li>
-              <Link to="/updateticket">Update Ticket</Link>
             </li>
 
             {user?.role === "admin" && (
@@ -41,13 +64,15 @@ const Nav = () => {
               </>
             ) : (
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <span
+                  className="nav-link"
+                  onClick={handleLogout}
+                  style={{ cursor: "pointer" }}
+                >
+                  Logout
+                </span>
               </li>
             )}
-
-            <li>
-              <Link to="/">Logout</Link>
-            </li>
           </ul>
         </div>
       </nav>

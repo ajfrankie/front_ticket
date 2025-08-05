@@ -45,3 +45,35 @@
   font-size: 14px;
   color: #555;
 }
+
+.home-container {
+  padding: 40px;
+  text-align: center;
+}
+
+.create-ticket-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-ticket-btn:hover {
+  background-color: #0c75d0;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 24px;
+  flex-wrap: wrap; 
+}
+
+.navbar-space {
+  height: 80px; 
+}

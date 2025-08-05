@@ -43,6 +43,7 @@ const Home = () => {
       <div className="navbar-space"></div>
 
       <main className="home-container">
+         <h1> Ticket Update</h1>
         {loading ? (
           <p>Loading tickets...</p>
         ) : tickets.length === 0 ? (
@@ -52,8 +53,12 @@ const Home = () => {
             {tickets.map((ticket) => (
               <div key={ticket.id} className="ticket-card">
                 <h3>{ticket.subject}</h3>
-                <p><strong>Priority:</strong> {ticket.priority}</p>
-                <p><strong>Status:</strong> {ticket.status}</p>
+                <p>
+                  <strong>Priority:</strong> {ticket.priority}
+                </p>
+                <p>
+                  <strong>Status:</strong> {ticket.status}
+                </p>
                 <p className="description">{ticket.description}</p>
 
                 <button
@@ -64,9 +69,8 @@ const Home = () => {
                 </button>
 
                 <button
-                  className="update-btn"
+                  className="update-btn ml-10"
                   onClick={() => goToUpdatePage(ticket.id)}
-                  style={{ marginLeft: "10px" }}
                 >
                   Update
                 </button>
