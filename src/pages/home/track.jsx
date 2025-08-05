@@ -42,7 +42,7 @@ const Track = () => {
   const fetchMessages = () => {
     axios
       .post(
-        "http://localhost:8000/api/admin/replay/show",
+        "http://localhost:8000/api/admin/replay/store",
         { ticket_id: id },
         { withCredentials: true }
       )
@@ -95,10 +95,7 @@ const Track = () => {
 
         {ticket && (
           <div className="ticket-details">
-            <h2>Ticket #{ticket.id}</h2>
-            <p>
-              <strong>Subject:</strong> {ticket.subject}
-            </p>
+            <h2>Ticket: {ticket.subject}</h2>
             <p>
               <strong>Status:</strong> {ticket.status}
             </p>
