@@ -32,6 +32,8 @@ const Ticket = () => {
     }));
   };
 
+  // console.log("Ticket form data:", formData); 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -85,7 +87,7 @@ const Ticket = () => {
         <h2 className="ticket-title">Create Ticket</h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Subject & Priority */}
+          {}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="subject">Subject</label>
